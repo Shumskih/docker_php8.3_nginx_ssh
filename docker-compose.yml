@@ -10,7 +10,7 @@ services:
       - "80:80"
     links:
       - fpm
-    container_name: avido_nginx
+    container_name: php8.3_nginx_ssh_nginx
     restart: unless-stopped
 
   fpm:
@@ -22,11 +22,11 @@ services:
     ports:
       - '22:22'
     environment:
-      USER: avido
-      GROUP: avido
+      USER: sshuser
+      GROUP: sshuser
       HOSTUID: 1000
       HOSTGID: 1000
-    container_name: avido_fpm
+    container_name: php8.3_nginx_ssh_fpm
     restart: unless-stopped
 
   postgres:
@@ -36,6 +36,6 @@ services:
     user: postgres
     environment:
       - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=avido2
-    container_name: avido_postgres
+      - POSTGRES_DB=123456
+    container_name: php8.3_nginx_ssh_postgres
     restart: unless-stopped
