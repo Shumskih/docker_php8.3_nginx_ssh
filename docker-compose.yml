@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/Nginx.Dockerfile
+    image: nginx:1.23.1
+    ports:
+      - "80:80"
+    links:
+      - fpm
+    container_name: avido_nginx
+    restart: unless-stopped
+
+  fpm:
+    build:
+      context: .
+      dockerfile: docker/Fpm.Dockerfile
+    links:
+      - postgres
+    ports:
+      - '22:22'
+    environment:
+      USER: avido
+      GROUP: avido
+      HOSTUID: 1000
+      HOSTGID: 1000
+    container_name: avido_fpm
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:12.12
+    ports:
+      - '5432:5432'
+    user: postgres
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=avido2
+    container_name: avido_postgres
+    restart: unless-stopped

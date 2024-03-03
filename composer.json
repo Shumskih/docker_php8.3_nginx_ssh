@@ -1,0 +1,13 @@
+{
+    "name": "shumskih/php8.3_nginx_ssh",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Aleksandr Shumeiko",
+            "email": "alex.shumskih@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.3.3"
+    }
+}
